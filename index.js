@@ -27,7 +27,7 @@ app.get("/api/:date?", function (req, res) {
   var d;
   if (!date) {
     d = new Date();
-    return res.json({ unix: d.getTime(), utc: d });
+    return res.json({ unix: d.getTime(), utc: d.toUTCString() });
   }
   try {
     if (isNaN(date)) {
@@ -37,7 +37,7 @@ app.get("/api/:date?", function (req, res) {
     }
     const output = {
       unix: d.getTime(),
-      utc: d,
+      utc: d.toUTCString(),
     };
     return res.json(output);
   } catch {
