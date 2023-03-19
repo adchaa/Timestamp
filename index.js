@@ -34,13 +34,16 @@ app.get("/api/:date?", function (req, res) {
   } else {
     d = new Date(Number(date));
   }
-  if (d.isValid()) {
-    const output = {
+  let output;
+  if (d.toString() != "Invalid Date") {
+    console.log("aaaa");
+    output = {
       unix: d.getTime(),
       utc: d.toUTCString(),
     };
   } else {
-    const output = { error: "invalid Date" };
+    console.log("a");
+    output = { error: d.toString() };
   }
   return res.json(output);
 });
